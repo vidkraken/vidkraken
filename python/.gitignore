@@ -1,0 +1,21 @@
+# Local virtualenv
+.venv/
+.venv-*/
+.uv-cache/
+.uv-python/
+venv/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+*.whl
+
+# Caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/

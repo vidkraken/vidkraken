@@ -1,0 +1,47 @@
+name: Release Python package
+
+# Publishes python/ to PyPI with trusted publishing (no API token): PyPI
+# trusts this workflow + the "pypi" environment for the vidkraken project.
+# Bump python/src/vidkraken/_version.py, then run this workflow or push a
+# python-v<version> tag.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["python-v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      - run: mypy --strict src
+      - run: python -m build
+      - run: twine check dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-dist
+          path: python/dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/vidkraken/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
