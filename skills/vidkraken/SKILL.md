@@ -47,7 +47,7 @@ Needs an API key: the user gets one at https://vidkraken.com/login (free to star
      -d '{"url":"https://youtu.be/dQw4w9WgXcQ","format":"1080"}'
    ```
 
-   The response carries a `jobId`. Optional fields: `startTime` and `endTime` (seconds) for a clip, `language` (BCP-47) for a dubbed audio track, `webhookUrl` to be notified instead of polling.
+   The response carries a `jobId`. Add `-H "Idempotency-Key: <uuid>"` and you can safely resend the same request after a timeout: you get the same job back, not a second (billed) one. Optional fields: `startTime` and `endTime` (seconds) for a clip, `language` (BCP-47) for a dubbed audio track, `webhookUrl` to be notified instead of polling.
 
 2. Poll every few seconds until `status` is `COMPLETED` or `FAILED`:
 
