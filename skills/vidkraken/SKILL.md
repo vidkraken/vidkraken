@@ -24,7 +24,17 @@ Connect to the remote MCP server at `https://vidkraken.com/api/mcp/mcp` (Streama
 3. `get_clip_status`: poll with the `jobId` until it is completed; the download link expires about 12 hours later.
 4. `get_account_usage`: plan and remaining balance. Free.
 
-## Option B: REST API (code or shell)
+## Option B: the `vidkraken` CLI (shell, one command)
+
+With `VIDKRAKEN_API_KEY` set (see below for getting a key), one command submits, waits and saves the file:
+
+```bash
+npx vidkraken download "https://youtu.be/dQw4w9WgXcQ" -f 1080 -o ./ --json
+```
+
+`pip install vidkraken` installs the same CLI for Python. Add `--start`/`--end` (seconds) for a clip; `vidkraken info <url> --json` returns metadata. Exit code 0 means success, 1 an API or job error (the JSON has `error.code`), 2 a usage error. In code, the same clients are `npm install vidkraken` and `pip install vidkraken`.
+
+## Option C: REST API (any language)
 
 Needs an API key: the user gets one at https://vidkraken.com/login (free to start, no credit card). Read it from an environment variable such as `VIDKRAKEN_API_KEY`; never print it.
 
@@ -54,7 +64,7 @@ Metadata only: `POST https://vidkraken.com/api/v2/info` with `{"url": "..."}` (a
 
 ## Errors
 
-- A `FAILED` job has an `errorCode`. Only `NETWORK_ERROR` is worth retrying; the rest (`AGE_RESTRICTED`, `GEO_RESTRICTED`, `PRIVATE_VIDEO`, `VIDEO_NOT_FOUND`, `MEMBERS_ONLY`, `LIVE_STREAM_IN_PROGRESS`, ...) describe the video: tell the user instead of retrying.
+- A `FAILED` job has an `errorCode`. Only `NETWORK_ERROR` is worth retrying right away. `VIDEO_PROCESSING`, `VIDEO_PREMIERE` and `LIVE_STREAM_IN_PROGRESS` are worth retrying later, once the video has finished processing, aired or ended. The rest (`AGE_RESTRICTED`, `GEO_RESTRICTED`, `PRIVATE_VIDEO`, `VIDEO_NOT_FOUND`, `MEMBERS_ONLY`, ...) describe the video: tell the user instead of retrying.
 - A rejected request returns an HTTP error whose JSON has a `code`: `INVALID_REQUEST` (400, fix the request), `UNAUTHORIZED` (401, bad API key), `LIMIT_REACHED` (403, the plan's allowance is used up), `VIDEO_NOT_FOUND` (404), `TOO_MANY_PENDING` (429, 100 downloads already queued or running: wait `Retry-After` seconds), `INTERNAL_ERROR` (500) or `UNAVAILABLE` (503); retry only the last two, after a short backoff.
 - The `RateLimit` header on `POST /download` (`"pending";r=37`) says how many more downloads can be queued now.
 
