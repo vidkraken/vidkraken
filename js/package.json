@@ -14,11 +14,11 @@
   "homepage": "https://vidkraken.com",
   "bugs": {
     "email": "hello@vidkraken.com",
-    "url": "https://github.com/Vid-Kraken/vidkraken/issues"
+    "url": "https://github.com/vidkraken/vidkraken/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vid-Kraken/vidkraken.git",
+    "url": "git+https://github.com/vidkraken/vidkraken.git",
     "directory": "js"
   },
   "license": "MIT",
