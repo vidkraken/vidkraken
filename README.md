@@ -10,7 +10,7 @@ Official SDKs, CLI and agent skill for [Vid Kraken](https://vidkraken.com), the 
 |---|---|---|
 | JavaScript / TypeScript SDK + CLI | `npm install vidkraken` | [js/](js/README.md) |
 | Python SDK + CLI | `pip install vidkraken` | [python/](python/README.md) |
-| Agent skill | `npx skills add vidkraken/vidkraken` | [skills/vidkraken/SKILL.md](skills/vidkraken/SKILL.md) |
+| Agent skills | `npx skills add vidkraken/vidkraken` | [vidkraken](skills/vidkraken/SKILL.md) (general), [vidkraken-audio](skills/vidkraken-audio/SKILL.md) (YouTube to MP3/AAC), [vidkraken-clips](skills/vidkraken-clips/SKILL.md) (cut clips by time) |
 | MCP server | `https://vidkraken.com/api/mcp/mcp` | [vidkraken.com/docs/mcp](https://vidkraken.com/docs/mcp) |
 
 ## Quickstart
