@@ -12,11 +12,12 @@ jobs:
       run:
         working-directory: js
     strategy:
+      fail-fast: false
       matrix:
         node: [18, 20, 22]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci
@@ -30,11 +31,14 @@ jobs:
       run:
         working-directory: python
     strategy:
+      fail-fast: false
       matrix:
-        python: ["3.9", "3.12", "3.13"]
+        # 3.9 is end-of-life and no longer on GitHub's runners; the package
+        # still supports it (tested locally).
+        python: ["3.10", "3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
       - run: pip install -e ".[dev]"
