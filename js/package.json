@@ -1,6 +1,6 @@
 {
   "name": "vidkraken",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Official Vid Kraken SDK and CLI: download YouTube videos and audio (MP4, MP3, M4A) through the Vid Kraken API.",
   "keywords": [
     "youtube",

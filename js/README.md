@@ -1,5 +1,9 @@
 # vidkraken
 
+[![Download success rate over the last 30 days](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fvidkraken.com%2Fapi%2Fstatus&query=%24.overall.reliability&suffix=%25&label=download%20success%2C%2030%20days&color=brightgreen&cacheSeconds=3600)](https://vidkraken.com/reliability)
+
+**Reliability you can check:** Vid Kraken publishes its download success rate live. The badge above is the share of downloads that completed over the last 30 days ([daily breakdown](https://vidkraken.com/reliability)). Bot detection, proxies, cookies and retries are handled on our servers, so your code never sees YouTube's blocks.
+
 The official JavaScript/TypeScript SDK and CLI for [Vid Kraken](https://vidkraken.com), a REST API for downloading YouTube videos and audio (MP4 from 360p to 1080p and 4K on request, M4A, MP3) without running yt-dlp yourself.
 
 - Zero runtime dependencies, typed, ESM + CommonJS
