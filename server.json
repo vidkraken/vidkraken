@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.vidkraken/vidkraken",
+  "title": "Vid Kraken",
+  "description": "Download YouTube videos and clips as MP4 or MP3/AAC, and look up video metadata.",
+  "version": "1.0.0",
+  "websiteUrl": "https://vidkraken.com/docs/mcp",
+  "icons": [
+    {
+      "src": "https://vidkraken.com/icons/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://vidkraken.com/api/mcp/mcp"
+    }
+  ]
+}
